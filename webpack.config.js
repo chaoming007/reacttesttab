@@ -1,0 +1,39 @@
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+module.exports={
+    entry:"./index.js",
+    output:{
+       path:"/dist",
+       publicPath:"/dist/",
+       filename:"build.js"
+    },
+    devtool:"source-map",
+    module:{
+       loaders:[
+          {
+            test:/\.js$/,
+            exclude:/node_modules/,
+            loader:"babel-loader"
+          },
+          {
+            test:/\.css$/,
+            exclude:/node_modules/,
+            loader:"style-loader!css-loader"          
+          },
+          {
+            test:/\.s[a|c]ss$/,
+            exclude:/node_modules/,
+            loader:"style-loader!css-loader!sass-loader"          
+          },
+          {
+            test:/\.(jpg|gif|png|jpeg)$/,
+            loader:"url-loader?limit=1000"
+          }
+       ]
+    },
+    resolve:{
+       extensions:['.js','.jsx','.json','.scss']
+    },
+    plugins: [
+      //  new ExtractTextPlugin("[name].css")
+    ]
+}
